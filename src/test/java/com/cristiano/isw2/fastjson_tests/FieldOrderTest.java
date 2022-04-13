@@ -1,17 +1,54 @@
 package com.cristiano.isw2.fastjson_tests;
 
-import com.alibaba.fastjson.JSON;
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
-public class FieldOrderTest extends TestCase {
-    public void test_field_order() throws Exception {
-        Person p = new Person();
-        p.setName("njb");
-        School s = new School();
-        s.setName("llyz");
+import java.util.Arrays;
+import java.util.Collection;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
+import com.alibaba.fastjson.JSON;
+
+@RunWith (value=Parameterized.class)
+public class FieldOrderTest {
+
+	String expectedJson;
+	Person p;
+	String pName;
+	School s;
+	String sName;
+
+
+	@Parameters
+	public static Collection<Object[]> data() {
+		return Arrays.asList(new Object[][] {
+			// expectedJson, pName, sName
+			{"{\"name\":\"njb\",\"school\":{\"name\":\"llyz\"}}", "njb", "llyz"},
+		});
+	}
+
+	public FieldOrderTest(String expectedJson, String pName, String sName) {
+		this.expectedJson = expectedJson;
+		this.pName = pName;
+		this.sName = sName;
+	}
+
+	@Before
+	public void configure() {
+		p = new Person();
+		p.setName(pName);
+		s = new School();
+        s.setName(sName);
         p.setSchool(s);
-        String json = JSON.toJSONString(p);
-        assertEquals("{\"name\":\"njb\",\"school\":{\"name\":\"llyz\"}}", json);
+	}
+
+	@Test
+    public void test_field_order() throws Exception {
+        assertEquals(expectedJson, JSON.toJSONString(p));
     }
 
     public static class Person {
