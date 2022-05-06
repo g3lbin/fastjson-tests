@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import java.util.Arrays;
 import java.util.Collection;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -32,13 +31,14 @@ public class FieldOrderTest {
 	}
 
 	public FieldOrderTest(String expectedJson, String pName, String sName) {
+		configure(expectedJson, pName, sName);
+	}
+
+	public void configure(String expectedJson, String pName, String sName) {
 		this.expectedJson = expectedJson;
 		this.pName = pName;
 		this.sName = sName;
-	}
 
-	@Before
-	public void configure() {
 		p = new Person();
 		p.setName(pName);
 		s = new School();

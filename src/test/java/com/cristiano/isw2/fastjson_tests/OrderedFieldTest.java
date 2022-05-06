@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -18,25 +17,24 @@ public class OrderedFieldTest {
 
 	private int expectedId;
 	private String text;
-	private Feature feature;
 	private Model model;
 
 	@Parameters
 	public static Collection<Object[]> data() {
 		return Arrays.asList(new Object[][] {
-			// expectedId, text, feature
-			{1001, "{\"id\":1001}", Feature.OrderedField},
+			// expectedId, feature
+			{1001, Feature.OrderedField},
 		});
 	}
 
-	public OrderedFieldTest(int expectedId, String text, Feature feature) {
-		this.expectedId = expectedId;
-		this.text = text;
-		this.feature = feature;
+	public OrderedFieldTest(int expectedId, Feature feature) {
+		configure(expectedId, feature);
 	}
 
-	@Before
-	public void configure() {
+	public void configure(int expectedId, Feature feature) {
+		this.expectedId = expectedId;
+
+		text = "{\"id\":" + expectedId + "}";
 		model = JSON.parseObject(text, Model.class, feature);
 	}
 
