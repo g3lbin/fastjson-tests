@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -18,6 +19,8 @@
     <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
     <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
     <path.fjson.fat.jar>/home/cristiano/github-projects/fastjson-tests/src/test/lib</path.fjson.fat.jar>
+    <sonar.organization>cristiano-u08</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
   </properties>
 
   <dependencies>
@@ -28,14 +31,15 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-	  <groupId>com.alibaba</groupId>
-	  <artifactId>fastjson</artifactId>
-	  <version>1.2.79</version>
-	</dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.79</version>
+    </dependency>
   </dependencies>
 
   <build>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven 
+        defaults (may be moved to parent pom) -->
       <plugins>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
         <plugin>
@@ -51,8 +55,8 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
           <configuration>
-	        <release>11</release>
-	  	  </configuration>
+            <release>11</release>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
@@ -86,71 +90,72 @@
   <profiles>
     <profile>
       <id>coverageProfile</id>
-		  <activation>
+      <activation>
         <activeByDefault>false</activeByDefault>
-		  </activation>
-		  <dependencies>
-			  <dependency>
+      </activation>
+      <dependencies>
+        <dependency>
           <groupId>com.alibaba</groupId>
           <artifactId>fastjson</artifactId>
           <version>1.2.79</version>
-				  <scope>system</scope>
-				  <systemPath>${path.fjson.fat.jar}/fastjson-1.2.79-fat.jar</systemPath>
-			  </dependency>
-			  <dependency>
+          <scope>system</scope>
+          <systemPath>${path.fjson.fat.jar}/fastjson-1.2.79-fat.jar</systemPath>
+        </dependency>
+        <dependency>
           <groupId>commons-logging</groupId>
-				  <artifactId>commons-logging</artifactId>
-				  <version>1.1</version>
-			  </dependency>
-			  <dependency>
-				  <groupId>concurrent</groupId>
-				  <artifactId>concurrent</artifactId>
-				  <version>1.0</version>
-			  </dependency>
-			  <dependency>
-				  <groupId>org.jacoco</groupId>
-				  <artifactId>org.jacoco.agent</artifactId>
-				  <classifier>runtime</classifier>
-				  <version>${jacoco-maven-plugin.version}</version>
-			  </dependency>
+          <artifactId>commons-logging</artifactId>
+          <version>1.1</version>
+        </dependency>
+        <dependency>
+          <groupId>concurrent</groupId>
+          <artifactId>concurrent</artifactId>
+          <version>1.0</version>
+        </dependency>
+        <dependency>
+          <groupId>org.jacoco</groupId>
+          <artifactId>org.jacoco.agent</artifactId>
+          <classifier>runtime</classifier>
+          <version>${jacoco-maven-plugin.version}</version>
+        </dependency>
       </dependencies>
-		  <build>
-			  <plugins>
-				  <plugin>
-					  <groupId>org.jacoco</groupId>
-					  <artifactId>jacoco-maven-plugin</artifactId>
-					  <version>${jacoco-maven-plugin.version}</version>
-					  <executions>
-						  <!-- NOTE THAT AUTOMATIC REPORTING IS USELESS, AS THE SOURCE FILES OF FastJSON ARE NEEDED: -->
-						  <!-- GENERATE THE REPORTS OFFLINE AS DESCRIBED IN  jacocolibSnippets.txt -->
-						  <execution>
-							  <id>TheExecutionId</id>
-							  <goals>
-								  <goal>prepare-agent</goal>
-							  </goals>
-							  <configuration></configuration>
-						  </execution>
-					  </executions>
-				  </plugin>
-				  <plugin>
-					  <groupId>org.apache.maven.plugins</groupId>
-					  <artifactId>maven-surefire-plugin</artifactId>
-					  <version>${maven-surefire-plugin.version}</version>
-					  <executions>
-						  <execution>
-							  <id>TheExecutionId-Surefire</id>
-							  <goals>
-								  <goal>test</goal>
-							  </goals>
-						  </execution>
-					  </executions>
-					  <configuration>
-						  <reuseForks>false</reuseForks>
-						  <useUnlimitedThreads>true</useUnlimitedThreads>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>${jacoco-maven-plugin.version}</version>
+            <executions>
+              <!-- NOTE THAT AUTOMATIC REPORTING IS USELESS, AS THE SOURCE 
+                FILES OF FastJSON ARE NEEDED: -->
+              <!-- GENERATE THE REPORTS OFFLINE AS DESCRIBED IN jacocolibSnippets.txt -->
+              <execution>
+                <id>TheExecutionId</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+                <configuration></configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${maven-surefire-plugin.version}</version>
+            <executions>
+              <execution>
+                <id>TheExecutionId-Surefire</id>
+                <goals>
+                  <goal>test</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <reuseForks>false</reuseForks>
+              <useUnlimitedThreads>true</useUnlimitedThreads>
             </configuration>
-			 	  </plugin>
-			  </plugins>
-		  </build>
-	  </profile>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
 </project>
