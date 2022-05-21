@@ -15,32 +15,32 @@ import com.alibaba.fastjson.parser.Feature;
 @RunWith (value=Parameterized.class)
 public class OrderedFieldTest {
 
-	private int expectedId;
+	private int modelId;
 	private String text;
 	private Model model;
 
 	@Parameters
 	public static Collection<Object[]> data() {
 		return Arrays.asList(new Object[][] {
-			// expectedId, feature
-			{1001, Feature.OrderedField},
+			// modelId, feature
+			{1001},
 		});
 	}
 
-	public OrderedFieldTest(int expectedId, Feature feature) {
-		configure(expectedId, feature);
+	public OrderedFieldTest(int modelId) {
+		configure(modelId);
 	}
 
-	public void configure(int expectedId, Feature feature) {
-		this.expectedId = expectedId;
+	public void configure(int modelId) {
+		this.modelId = modelId;
 
-		text = "{\"id\":" + expectedId + "}";
-		model = JSON.parseObject(text, Model.class, feature);
+		text = "{\"id\":" + modelId + "}";
+		model = JSON.parseObject(text, Model.class, Feature.OrderedField);
 	}
 
 	@Test
     public void test_ordered_field() throws Exception {
-        Assert.assertEquals(expectedId, model.getId());
+        Assert.assertEquals(modelId, model.getId());
         Assert.assertEquals(text, JSON.toJSONString(model));
     }
     
