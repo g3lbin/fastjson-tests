@@ -18,7 +18,9 @@
     <maven.compiler.target>11</maven.compiler.target>
     <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
     <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+    <!-- for local coverage calculation -->
     <path.fjson.fat.jar>/home/cristiano/github-projects/fastjson-tests/src/test/lib</path.fjson.fat.jar>
+    <!-- attach to sonarcloud -->
     <sonar.organization>cristiano-u08</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
   </properties>
