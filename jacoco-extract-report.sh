@@ -8,7 +8,7 @@ PATH_FJSON_FAT_JAR="/home/cristiano/Scrivania/ISW2_class/2022/EsempiJacocoFastJS
 ## CREAZIONE CON JACOCO DA CLI DEL FAT-JAR INSTUMENTATO:
 ## (https://www.jacoco.org/jacoco/trunk/doc/cli.html)
 
-#java -jar ${PATH_JACOCO_CLI_JAR}/jacococli.jar instrument ${PATH_FJSON_JAR}/fastjson-1.2.79.jar --dest ${PATH_FJSON_FAT_JAR}
+#java -jar ${PATH_JACOCO_CLI_JAR} instrument ${PATH_FJSON_JAR} --dest ${PATH_FJSON_FAT_JAR}
 
 ## *****************************************************************
 ## *****************************************************************

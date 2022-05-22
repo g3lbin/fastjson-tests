@@ -24,6 +24,8 @@ public class OrderedFieldTest {
 		return Arrays.asList(new Object[][] {
 			// modelId, feature
 			{1001},
+			{-1},
+			{0},
 		});
 	}
 

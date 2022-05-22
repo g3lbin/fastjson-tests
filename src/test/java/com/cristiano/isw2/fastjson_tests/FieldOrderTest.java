@@ -27,6 +27,14 @@ public class FieldOrderTest {
 		return Arrays.asList(new Object[][] {
 			// expectedJson, pName, sName
 			{"{\"name\":\"njb\",\"school\":{\"name\":\"llyz\"}}", "njb", "llyz"},
+			{"{\"name\":\"njb\",\"school\":{}}", "njb", null},
+			{"{\"school\":{\"name\":\"llyz\"}}", null, "llyz"},
+			{"{\"name\":\"njb\",\"school\":{\"name\":\"\"}}", "njb", ""},
+			{"{\"name\":\"\",\"school\":{\"name\":\"llyz\"}}", "", "llyz"},
+			{"{\"name\":\"\",\"school\":{}}", "", null},
+			{"{\"school\":{\"name\":\"\"}}", null, ""},
+			{"{\"name\":\"\",\"school\":{\"name\":\"\"}}", "", ""},
+			{"{\"school\":{}}", null, null},
 		});
 	}
 
